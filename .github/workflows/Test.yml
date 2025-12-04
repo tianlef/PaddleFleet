@@ -134,7 +134,6 @@ jobs:
             -O bos_tools.py
           push_file=$(realpath bos_tools.py)
           cp /paddle/coveragedata/coverage.xml coverage.xml
-
           target_path="paddle-github-action/${GITHUB_REPO_NAME}/pull/${PR_ID}/${GITHUB_SHA}/single-card"
           uv run ${push_file} coverage.xml ${target_path}
           '
@@ -224,7 +223,6 @@ jobs:
           uv run coverage combine
           uv run coverage xml -o /paddle/coveragedata/coverage.xml
           uv run coverage report -m
-
           if [[ "$multi_card_exit_code" != "0" ]]; then
             echo -e "::error:: \033[31mMulti card test failed.\033[0m"
             exit 1
@@ -318,7 +316,7 @@ jobs:
           echo "Install uv"
           pip install uv
           echo "uv sync"
-          uv sync --group ci -v > /dev/null
+          uv sync -v
           '
 
       - name: Install PaddleFormers
@@ -505,7 +503,7 @@ jobs:
           echo "Install uv"
           pip install uv
           echo "uv sync"
-          uv sync --group ci > /dev/null
+          uv sync > /dev/null
           '
 
       - name: Install PaddleFormers
